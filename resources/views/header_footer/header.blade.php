@@ -223,7 +223,7 @@
 												</a>
 												<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow animated">
 													<div class="p-3 text-center border-bottom">
-														<a href="profile-1.html" class="text-center user pb-0 font-weight-bold">John Thomson</a>
+														<a href="profile-1.html" class="text-center user pb-0 font-weight-bold">  {{ Auth::user()->name }}</a>
 														<p class="text-center user-semi-title">App Developer</p>
 													</div>
 													<a class="dropdown-item d-flex" href="profile-1.html">
@@ -242,10 +242,16 @@
 														<i class="feather feather-edit-2 me-3 fs-16 my-auto"></i>
 														<div class="mt-1">Change Password</div>
 													</a>
-													<a class="dropdown-item d-flex" href="login-1.html">
-														<i class="feather feather-power me-3 fs-16 my-auto"></i>
-														<div class="mt-1">Sign Out</div>
-													</a>
+													
+													<a class="dropdown-item dropdown-item d-flex" href="{{ route('logout') }}"
+                                       					onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+													 <i class="feather feather-power me-3 fs-16 my-auto"></i>
+                                       					 {{ __('Logout') }}
+                                   					 </a>
+														<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+														@csrf
+													</form>
 												</div>
 											</div>
 										</div>

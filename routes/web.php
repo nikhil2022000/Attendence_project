@@ -14,7 +14,7 @@ use App\Http\Controllers\Data;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 Route::get('dash', function () {
     return view('Attendence.dashborad');
