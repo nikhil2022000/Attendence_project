@@ -58,7 +58,19 @@
 											placeholder="Enter Name" autocomplete="off">
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6" id="hi">
+								<div class="form-group">
+									<label class="form-label">select date/month:</label>
+									<select id="dubble" class="form-control" name="month">
+										<option label="Select"></option>
+										<option value="yes">Date</option>
+										<option value="no">Month</option>
+										
+									</select>
+								</div>
+							</div>
+
+							<div id="da"class="col-md-6" style="display:none;">
 								<div class="form-group">
 									<label class="form-label">Select Date:</label>
 									<div class="input-group">
@@ -71,39 +83,48 @@
 									</div>
 								</div>
 							</div>
+							<div  id="mon" class="col-md-6" style="display:none;">
+								<div class="form-group">
+									<label class="form-label">Month:</label>
+									<select class="form-control custom-select select2" data-placeholder="Select month" name="month">
+										<option label="Select Month"></option>
+										<option value="January">January</option>
+										<option value="February">February</option>
+										<option value="March">March</option>
+										<option value="April">April</option>
+										<option value="May">May</option>
+										<option value="june">june</option>
+										<option value="July">July</option>
+										<option value="August">August</option>
+										<option value="September">September</option>
+										<option value="October">October</option>
+										<option value="November">November</option>
+										<option value="December">December</option>
+										
+									</select>
+								</div>
+							</div>
+							
 						</div>
 					</div>
 					<div class="col-md-12 col-lg-5">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="form-label">Month:</label>
+									<label class="form-label">Shift:</label>
 									<input class="form-control" type="text" name="shift" placeholder="Enter shfit">
 									
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div id="da"class="col-md-6" >
 								<div class="form-group">
-									<label class="form-label">Year:</label>
-									<select class="form-control custom-select select2" data-placeholder="Select Year">
-										<option label="Select Year"></option>
-										<option value="1">2024</option>
-										<option value="2">2023</option>
-										<option value="3">2022</option>
-										<option value="4">2021</option>
-										<option value="5">2020</option>
-										<option value="6">2019</option>
-										<option value="7">2018</option>
-										<option value="8">2017</option>
-										<option value="9">2016</option>
-										<option value="10">2015</option>
-										<option value="11">2014</option>
-										<option value="12">2013</option>
-										<option value="13">2012</option>
-										<option value="14">2011</option>
-										<option value="15">2019</option>
-										<option value="16">2010</option>
-									</select>
+									<label class="form-label">Branch:</label>
+									<div class="input-group">
+										
+											
+										<input class="form-control" placeholder="Enter branch" type="text"
+											name="branch">
+									</div>
 								</div>
 							</div>
 						</div>
@@ -205,6 +226,22 @@ $t = date("H:i:s", strtotime($user->last_out));
 
 
 <script>
+	
+															
+			$('#dubble').on('change', function() {
+				if ( this.value == 'yes')
+					{
+						$('#hi').hide();
+						$('#da').show();
+				}
+				if ( this.value == 'no')
+					{
+						$('#hi').hide();
+						$('#mon').show();
+				}
+		});
+						
+												
 	/////////////////////////////////////////table jquery//////////////////////////////////////
 $('#table_id tbody tr').each(function(){
 		var in_time = $(this).find('td:nth-child(5)').html();
@@ -323,7 +360,8 @@ if(att == ''){
 
 
 	});
-	//////////////////////////////////////search employ ajax///////////////////////////////////
+
+////////////////////search employ ajax///////////////////////////////////
 	$('#formemploy').on('submit', function (e) {
 		//alert('ds');
 		e.preventDefault();
@@ -352,7 +390,7 @@ if(att == ''){
 						var key = Object.keys(this);
 						var value = this;
 						//alert(value);
-						$('#table_id tbody').append("<tr><td>" + value.user_id + "</td><td>" + value.name + "</td><td>" + value.Shift + "</td><td>" + value.date + "</td><td>" + value.first_in + "</td><td>" + value.last_out + "</td><td>" + value.in_device + "</td><td>" + value.out_device + "</td><td></td><td></td><td>" + value.total_hours100 + "</td><td></td></tr>");
+						$('#table_id tbody').append("<tr><td>" + value.user_id + "</td><td>" + value.name + "</td><td>" + value.Shift + "</td><td>" + value.date + "</td><td>" + value.first_in + "</td><td>" + value.last_out + "</td><td>" + value.in_device + "</td><td>" + value.out_device + "</td><td>"+ value.Branch +"</td><td></td><td>" + value.total_hours100 + "</td><td></td></tr>");
 					});
 				} else {
 					swal("OOH Error!",'Recode is not available', "error");

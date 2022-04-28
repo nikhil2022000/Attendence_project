@@ -9,7 +9,7 @@
 										</div>
 									@endif		
 									</div>
-									<div class="card-footer  text-white z-index-10">
+									<div class="card-footer  text-white z-index-10" style="background-color: #917d2b;">
                                     <form  method="post" enctype="multipart/form-data" action="{{url('import')}}"> 
 												<div class="modal-body">
                                                   {{ csrf_field() }}
