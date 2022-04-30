@@ -6,9 +6,10 @@ use App\Imports\usersImport;
 use DB;
 use Excel;
 use Illuminate\Http\Request;
+use App\Models\Attendence;
 use Response;
 
-//use Carbon\Carbon;
+use Carbon\Carbon;
 class Data extends Controller
 {
     public function import(Request $req)
@@ -38,37 +39,25 @@ class Data extends Controller
     public function employ(Request $req)
     {
 
-        // echo"<pre>";print_r($_POST);die;
-        //$data=DB::table('excel')->get();
+
+
         $name = $req->get('name');
         $date = $req->get('date');
+        $fromto = $req->get('fromto');
         $shift = $req->get('shift');
         $branch = $req->get('branch');
-     //$month = $req->get('month');
-
-
-        //echo"<pre>";print_r($name);
-
-        // echo"<pre>";print_r($month);die;
-        // $ff=DB::table('excel')->select('date')->get();
-        // //dd($ff);
-        // $rs = json_decode(json_encode($ff));
-        // $aa=explode($rs);
-        //$month = Carbon::createFromFormat('d/m/Y', $aa)->format('F');
-        //dd($month);
+        $month = $req->get('month');
+       
         $data = DB::table('excel')
-            ->Join('sheet1', 'excel.user_id', '=', 'sheet1.empid')->get();
-        //echo"<pre>";print_r($data);die;
+                ->Join('sheet1', 'excel.user_id', '=', 'sheet1.empid')
+                ->where('excel.Name','LIKE',"%".$name."%")
+                //->where('excel.date', 'LIKE',"%".$date."%")
+                ->where('sheet1.Shift', 'LIKE',"%".$shift."%")
+                ->where('sheet1.Branch', 'LIKE',"%".$branch."%")
+                ->whereBetween('excel.date',[$date.'00:00:00',$fromto.'23:59:59'])
+                ->get();
 
-            if($name != null){
-               $data->where('excel.name', $name );
-                alert($data);
-            
-           
-            
-        //    ->OrWhere('excel.date', $date)
-        //     ->OrWhere('sheet1.Shift', $shift)
-        //     ->OrWhere('sheet1.Branch', $shift)->get();
+
 
         //echo"<pre>";print_r($data);die;
         // return view('Attendence.search_employ',['data'=>$data]);
@@ -76,6 +65,6 @@ class Data extends Controller
         $response['success'] = true;
         $response['messages'] = 'Succesfully loaded';
         return Response::json($response);
+        // }
     }
-}
 }

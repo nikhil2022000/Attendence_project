@@ -47,7 +47,7 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="row">
-					<div class="col-md-12 col-lg-5">
+					<div class="col-md-12 col-lg-6">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -58,19 +58,7 @@
 											placeholder="Enter Name" autocomplete="off">
 								</div>
 							</div>
-							<div class="col-md-6" id="hi">
-								<div class="form-group">
-									<label class="form-label">select date/month:</label>
-									<select id="dubble" class="form-control" name="month">
-										<option label="Select"></option>
-										<option value="yes">Date</option>
-										<option value="no">Month</option>
-										
-									</select>
-								</div>
-							</div>
-
-							<div id="da"class="col-md-6" style="display:none;">
+							<div id="da"class="col-md-6" >
 								<div class="form-group">
 									<label class="form-label">Select Date:</label>
 									<div class="input-group">
@@ -83,32 +71,33 @@
 									</div>
 								</div>
 							</div>
-							<div  id="mon" class="col-md-6" style="display:none;">
+							<div class="col-md-6" >
 								<div class="form-group">
-									<label class="form-label">Month:</label>
-									<select class="form-control custom-select select2" data-placeholder="Select month" name="month">
-										<option label="Select Month"></option>
-										<option value="January">January</option>
-										<option value="February">February</option>
-										<option value="March">March</option>
-										<option value="April">April</option>
-										<option value="May">May</option>
-										<option value="june">june</option>
-										<option value="July">July</option>
-										<option value="August">August</option>
-										<option value="September">September</option>
-										<option value="October">October</option>
-										<option value="November">November</option>
-										<option value="December">December</option>
-										
-									</select>
+									<label class="form-label">Branch:</label>
+									<input class="form-control" type="text" name="branch" placeholder="Enter Branch">
+									
 								</div>
 							</div>
 							
+							
 						</div>
 					</div>
-					<div class="col-md-12 col-lg-5">
+					<div class="col-md-12 col-lg-6">
 						<div class="row">
+						<div id="da"class="col-md-6" >
+								<div class="form-group">
+									<label class="form-label">From To:</label>
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<div class="input-group-text">
+												<i class="feather feather-calendar"></i>
+											</div>
+										</div><input class="form-control" placeholder="DD-MM-YYYY" type="date"
+											name="fromto">
+									</div>
+								</div>
+							</div>
+							
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="form-label">Shift:</label>
@@ -116,24 +105,16 @@
 									
 								</div>
 							</div>
-							<div id="da"class="col-md-6" >
-								<div class="form-group">
-									<label class="form-label">Branch:</label>
-									<div class="input-group">
-										
-											
-										<input class="form-control" placeholder="Enter branch" type="text"
-											name="branch">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-12 col-lg-2">
-						<div class="form-group mt-5">
+							
+					<div id="da"class="col-md-6" style="margin-left: 224px;">
+							<div class="form-group mt-5">
 							<input type="submit" name="submit" class="btn btn-primary btn-block" value="search">
 						</div>
+					</div>
+						
+
 						</form>
+					
 					</div>
 				</div>
 			</div>
@@ -228,18 +209,7 @@ $t = date("H:i:s", strtotime($user->last_out));
 <script>
 	
 															
-			$('#dubble').on('change', function() {
-				if ( this.value == 'yes')
-					{
-						$('#hi').hide();
-						$('#da').show();
-				}
-				if ( this.value == 'no')
-					{
-						$('#hi').hide();
-						$('#mon').show();
-				}
-		});
+		
 						
 												
 	/////////////////////////////////////////table jquery//////////////////////////////////////
@@ -382,7 +352,7 @@ if(att == ''){
 				},
 			success: function (response) {
 				//var valdata=response['data'] ;
-				//console.log(response['data']);
+				console.log(response['data']);
 
 				//alert(response['data']);
 				if (response['data'] != '') {
@@ -394,6 +364,8 @@ if(att == ''){
 					});
 				} else {
 					swal("OOH Error!",'Recode is not available', "error");
+
+					location.reload();
 				}
 			}
 
