@@ -36,8 +36,10 @@ Route::get('list', function () {
 Route::any('emplist', [Data::class,'show']);
 
 Route::get('employ', function () {
-    return view('Attendence.search_employ');
+    return view('Attendence.month_attendence');
 });
+Route::any('month_list', [Data::class,'M_list']);
+
 
 Route::any('search', [Data::class,'employ']);
 

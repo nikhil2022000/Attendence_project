@@ -70,7 +70,7 @@
 								</div>
 							</div>
 							
-					<div id="da"class="col-md-6" style="margin-left: 224px;">
+					<div id="da"class="col-md-6" >
 							<div class="form-group mt-5">
 							<input type="submit" name="submit" class="btn btn-primary btn-block" value="search">
 						</div>
@@ -329,7 +329,7 @@ if(timeing=="00:00:00"){
 				console.log(response['data']);
 
 				//alert(response['data']);
-				if (response['data'] !== '') {
+				if (response['data'] != '') {
 					$.each(response['data'], function () {
 						var key = Object.keys(this);
 						var value = this;
@@ -469,7 +469,12 @@ if(timeing=="00:00:00"){
 
 					location.reload();
 				}
-			}
+			},
+			error: function (error) {
+    				swal("OOH Error!",'Recode is not available', "error");
+
+					location.reload();
+}
 
 		});
 
@@ -480,4 +485,10 @@ if(timeing=="00:00:00"){
 
 
 </script>
+<script>
+$(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 @endsection

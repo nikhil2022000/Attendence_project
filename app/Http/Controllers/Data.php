@@ -93,4 +93,10 @@ class Data extends Controller
      
         // }
     }
+    public function M_list(Request $req)
+    {
+        //dd('sfd');
+        $data = DB::table('excel')->select('name')->get();
+        return view('Attendence.month_attendence', ['data' => $data]);
+    }
 }
