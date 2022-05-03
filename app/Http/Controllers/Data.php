@@ -54,7 +54,7 @@ class Data extends Controller
                 //->where('excel.date', 'LIKE',"%".$date."%")
                 ->where('sheet1.Shift', 'LIKE',"%".$shift."%")
                 ->where('sheet1.Branch', 'LIKE',"%".$branch."%")
-                ->whereBetween('excel.date',[$date.'00:00:00',$fromto.'23:59:59'])
+                ->whereBetween('excel.date',[$date.'00:00:00',$fromto.'23:60:60'])
                 ->get();
 
 

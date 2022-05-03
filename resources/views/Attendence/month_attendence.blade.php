@@ -69,7 +69,7 @@
 							
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="form-label">Shift:</label>
+									<label class="form-label" style="display:none;">Shift:</label>
 									<input type="submit" name="submit" class="btn btn-primary btn-block" value="search">
 									
 								</div>

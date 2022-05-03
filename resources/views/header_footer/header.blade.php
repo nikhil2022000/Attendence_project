@@ -284,7 +284,7 @@
 											<img src="{{url('degine/images/users/16.jpg')}}" alt="user-img" class="avatar-xxl rounded-circle mb-1">
 										</div>
 										<div class="user-info">
-											<h5 class=" mb-2">Abigali kelly</h5>
+											<h5 class=" mb-2"> {{ Auth::user()->name }}</h5>
 											<span class="text-muted app-sidebar__user-name text-sm">App Developer</span>
 										</div>
 									</div>
@@ -307,26 +307,11 @@
 													<li><a href="/fetch" class="sub-slide-item">Attendence list</a></li>
 													<li><a href="/emplist" class="sub-slide-item">short attendence</a></li>
 													<li><a href="/month_list" class="sub-slide-item">Month Attendence</a></li>
-													
-
-													
-													
-													
-												</ul>
+											</ul>
 											</li>
-											
-											
-											
-
-											
 										</ul>
 									</li>
-									
-									
-									
-									
 								</ul>
-								
 							</div>
 						</div>
 					</aside>
@@ -335,3 +320,20 @@
 
 				<div class="app-content main-content">
 					<div class="side-app main-container">
+					<!--Page header-->
+					<div class="page-header d-xl-flex d-block">
+							<div class="page-leftheader">
+								<div class="page-title">Attendance</div>
+							</div>
+							<div class="page-rightheader ms-md-auto">
+								<div class="d-flex align-items-end flex-wrap my-auto end-content breadcrumb-end">
+									<div class="btn-list">
+										<a href="hr-attmark.html" class="btn btn-primary me-3">Mark Attendance</a>
+										<button  class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top" title="E-mail"> <i class="feather feather-mail"></i> </button>
+										<button  class="btn btn-light" data-bs-placement="top" data-bs-toggle="tooltip" title="Contact"> <i class="feather feather-phone-call"></i> </button>
+										<button  class="btn btn-primary" data-bs-placement="top" data-bs-toggle="tooltip" title="Info"> <i class="feather feather-info"></i> </button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--End Page header-->
