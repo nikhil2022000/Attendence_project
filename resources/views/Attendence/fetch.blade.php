@@ -329,7 +329,7 @@ if(timeing=="00:00:00"){
 				console.log(response['data']);
 
 				//alert(response['data']);
-				if (response['data'] != '') {
+				if (response['data'] !=  '') {
 					$.each(response['data'], function () {
 						var key = Object.keys(this);
 						var value = this;

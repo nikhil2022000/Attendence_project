@@ -43,7 +43,17 @@ public function headingRow(): int
         //$time_in_24_hour_format  = date();
         $last=  $last_out->format('h:i:s A');
 
-         //echo "<pre>";print_r($time);die;
+         //echo "<pre>";print_r($last);die;
+                                    $start= date("H:i:s", strtotime($time));
+									$end = date("H:i:s", strtotime($last));
+									//$new_time = "09:00 am";
+									$start_datetime = new DateTime($start);
+									$end_datetime = new DateTime($end);
+
+									$vv = ($start_datetime)->diff($end_datetime)->format('%h:%i');
+								
+
+
          if($row['user_id']==null){
   
          }else{
@@ -55,7 +65,8 @@ public function headingRow(): int
           'last_out' => $last,   
           'in_device'=> $row['in_device'],   
           'out_device' => $row['out_device'],   
-          'total_hours100'  => $row['total_hours100'],   
+          'total_hours100'  => $vv,   
+          'Month' => $_POST['month']
             
         ]);
     }

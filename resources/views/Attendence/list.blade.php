@@ -137,8 +137,7 @@
 														<th>Date</th>
 														<th>First_IN</th>
 														<th>Last_Out</th>
-														<th>IN_device</th>
-														<th>OUt_device</th>
+														
 														<th>Total_Hours100</th>
 													</tr>
 													
@@ -158,8 +157,7 @@
 														<td>{{$user->date}}</td>
 														<td>{{$user->first_in}}</td>
 														<td>{{$user->last_out}}</td>
-														<td>{{$user->in_device}}</td>
-														<td>{{$user->out_device}}</td>
+														
 														<td>{{$user->total_hours100}}</td>
 														
 													

@@ -42,6 +42,7 @@ Route::any('month_list', [Data::class,'M_list']);
 
 
 Route::any('search', [Data::class,'employ']);
+Route::any('search_month', [Data::class,'employ_month']);
 
 
 

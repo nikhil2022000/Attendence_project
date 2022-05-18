@@ -23,6 +23,8 @@ class CreateExcelTable extends Migration
             $table->string('in_device');
             $table->string('out_device');
             $table->string('total_hours100');
+            $table->string('Month');
+
             $table->timestamps();
         });
     }

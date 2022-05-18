@@ -18,5 +18,7 @@ class Attendence extends Model
         'in_device',
         'out_device',
         'total_hours100',
+        'Month',
+
     ];
 }
