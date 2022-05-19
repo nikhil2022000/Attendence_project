@@ -178,19 +178,15 @@
 
 						}
 					});
-					// $('#table_id tbody tr').each(function(){
-					// 			var a = $(this).find('td:nth-child(5)').html();
-					// 			if(a == '00:00:00'){
-					// 				$(this).find('td:nth-child(7)').html('0:0');
-					// 			}
-					// 		});	
-
+				
 				}
 				
-				else {
-					swal("OOH Error!",'Recode is not available', "error");
-				}
-			}
+			},
+				error: function (error) {
+    				swal("OOH Error!",'Recode is not available', "error");
+
+					location.reload();
+		}
 
 		});
 		
