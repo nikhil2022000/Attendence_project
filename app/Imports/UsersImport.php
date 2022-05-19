@@ -47,10 +47,16 @@ public function headingRow(): int
                                     $start= date("H:i:s", strtotime($time));
 									$end = date("H:i:s", strtotime($last));
 									//$new_time = "09:00 am";
+         //echo "<pre>";print_r($start);die;
+
 									$start_datetime = new DateTime($start);
 									$end_datetime = new DateTime($end);
-
-									$vv = ($start_datetime)->diff($end_datetime)->format('%h:%i');
+                               
+                           
+                                
+                                
+                                
+									$vv = ($start_datetime)->diff($end_datetime)->format('%h.%i');
 								
 
 
@@ -61,14 +67,15 @@ public function headingRow(): int
             'user_id' => $row['user_id'],
             'name' => $row['name'], 
             'date'=> $st,
-           'first_in' => $time,
-          'last_out' => $last,   
+           'first_in' => $start,
+          'last_out' => $end,   
           'in_device'=> $row['in_device'],   
           'out_device' => $row['out_device'],   
           'total_hours100'  => $vv,   
-          'Month' => $_POST['month']
-            
+          'Month' => $_POST['month'],
+            'year' => $_POST['year']
         ]);
     }
 }
 }
+

@@ -134,6 +134,7 @@ $count = count($dat);
 // ?>
 							<tr>
 							<th class="border-bottom-0">Employee ID</th>
+							<th class="border-bottom-0">Employee Name</th>
 							<!-- <th class="border-bottom-0">Employee</th> -->
 
 								<?php
@@ -154,37 +155,48 @@ for ($i = 1; $i <= $count; $i++) {
 
 							@foreach($employ as $user)
 							 <tr id="id">
+								 <td><h6 class="mb-1 fs-14">{{$user->Name}}</h6></td>
 								 <td id="id1" >
 									<div class="d-flex">
 										<span class="avatar avatar brround me-3"
 											style="background-image: url(../assets/images/users/1.jpg)"></span>
 										<div class="me-3 mt-0 mt-sm-2 d-block">
-											<h6 class="mb-1 fs-14">{{$user->Name}}</h6>
+											<h6 class="mb-1 fs-14">{{$user->Empid}}</h6>
 										</div>
 									</div>
 								</td>
 
 
 								<?php
-
-foreach ($date as $dif) {
-    $count = \Carbon\Carbon::parse($dif->date)->format('d');
+$c = 0;
+foreach ($Employdata as $dif) {
+	//dd($dif);
+    $count = \Carbon\Carbon::parse($dif['date'] )->format('d');
     //dd($count);
+	
     foreach ($th as $vv) {
 
-        if ($user->Empid == $dif->Empid && $count == $vv) {
+        if ($user->Empid == $dif['id'] && $count == $vv) {
 
             ?>
 									<td id="id2">
 											<div class="hr-listd">
 
-												<h6 class="mb-1 fs-14"><?php if ($dif->total_hours100 >= 8) {?> <span class="feather feather-check-circle text-success "> <?php } else {?>
-												 <span class="feather feather-x-circle text-danger "> <?php }?>
+												<h6 class="mb-1 fs-14"><?php if ($dif['total_hours100'] >= 8) {$c += 1;?> <span class="feather feather-check-circle text-success">{{$dif['total_hours100']}}
+													
+													<?php
+												
+											} else {?>
+												 <span class="feather feather-x-circle text-danger ">{{$dif['total_hours100']}} <?php }?>
 												</h6>
 
 											</div>
 										</td>
-
+										<script>
+														
+														var in_time = $("#m_table").attr('coun ').length;
+														
+												</script>
 
 									<?php
 }
@@ -198,9 +210,9 @@ foreach ($date as $dif) {
 											<td  id="id3">
 											<div class="hr-listd">
 														<h6 class="mb-0">
-																<span class="text-primary">{{$count}}</span>
+																<span class="text-primary">{{ $c }}</span>
 																<span class="my-auto fs-8 font-weight-normal text-muted">/</span>
-																<span class="">31</span>
+																<span class="">{{$count}}</span>
 												</h6>
 											</div>
 										</td>
@@ -250,7 +262,7 @@ foreach ($date as $dif) {
 				},
 			success: function (response) {
 				//var valdata=response['data'] ;
-				//console.log(response['data']);
+				console.log(response['data']);
 
 				function onlyUnique(value, index, self) {
  					 return self.indexOf(value) === index;
@@ -259,57 +271,68 @@ foreach ($date as $dif) {
 				//alert(response['data']);
 				if (response['data'] !=  '') {
 					var nm = [];
-					// var total = [];
+					var nam = [];
 					
-					function onlyUnique(value, index, self) {
-  					return self.indexOf(value) === index;
-					}
-					
+
 					$.each(response['data'], function () {
 						var key = Object.keys(this);
 						var value = this;
-						//consol.log(value);
+						// console.log(value);
 						var c = value.id;
-					    nm.push(c);
-					});
+						var d = value.Name;
+					    nm.push(c+'-'+d);
+						
+				});
 
+
+					
 					 var unique = nm.filter(onlyUnique);
-				// 	alert(unique);
-				    //console.log(response['data']);return false;
 
-				   $.each(unique, function () {
+					$.each(unique, function () {
 						var key = Object.keys(this);
 						var val = this;
-						$('#m_table tbody ').append("<tr><td>" + val + "</td></tr>");
+						//console.log(val);
+						$('#m_table tbody ').append("<tr><td mineData="+val+">" + val.split('-')[0] + "</td></tr>");
 
 					});
+
 					var i = 0;
 					$('#m_table tbody tr').each(function(){
 					i++;
 					//console.log(i);return false;
 				    var d = $(this).prop("id","id_"+i);
-		            var in_time = $(d).find('td:nth-child(1)').html();
+		            var in_time = $(d).find('td:nth-child(1)').attr('mineData');
+					in_time = in_time.split('-');
 					//alert(d);
 
+					$("#id_"+i).append("<td>" + in_time[1] + "</td>");	
+
+					var E = 0;
+					var F = 0;
 					$.each(response['data'], function () {
 						var key = Object.keys(this);
 						var dat = this;
-						//console.log(i);return false;
-					if(in_time ==  dat.id){
-						//$("#id_"+i).append("<td>" + dat.total_hours100  + "</td>");
-						//alert('#'+i);
-						//console.log(i);return false;
-						if(dat.total_hours100 >= '8'){
-							$("#id_"+i).append("<td>" + '<span class="feather feather-check-circle text-success">' + "</td>");	
+						
+					if(in_time[0] ==  dat.id){
+						F += 1;
+						if(dat.total_hours100 >= 8.0){
+							E += 1;
+							$("#id_"+i).append("<td>" + '<span class="feather feather-check-circle text-success">'+ dat.total_hours100 + "</td>");
+							
 						} else {
-						$("#id_"+i).append("<td>" +  '<span class="feather feather-x-circle text-danger ">' + "</td>");
+						$("#id_"+i).append("<td>" +  '<span class="feather feather-x-circle text-danger ">'+ dat.total_hours100 + "</td>");
+
                               
 						}
-					}						
+						
+					}	
+										
 				});	
+
+				$("#id_"+i).append("<td> <span>"+ E + "</span>/"+F +"</td>");	
 			});	
 					
-					
+				
 					
 			
 					
@@ -321,8 +344,16 @@ foreach ($date as $dif) {
 				  
 
 
-				}
+				}else{
+				
+			
 			}
+		},
+		error: function (error) {
+    				swal("OOH Error!",'Recode is not available', "error");
+
+					location.reload();
+		}
 		});
 	});
 

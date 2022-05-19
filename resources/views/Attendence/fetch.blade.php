@@ -461,6 +461,10 @@ if(timeing=="00:00:00"){
 	$(this).find('td:nth-child(11)').html('0:0');
 
 }
+if(timeing=="00:00:00"){
+	$(this).find('td:nth-child(9)').html('AB').css('color', 'red');
+
+}
 
 	});
 				} 
