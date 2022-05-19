@@ -1,6 +1,13 @@
 @extends('header_footer.main')
 @section('main-container')
-<div class="col-md-12 col-xl-6">
+<style>
+
+#vv {
+   
+    max-width: 100%;
+}
+	</style>
+<div class="col-md-12 col-xl-6 " id="vv">
 								<div class="card card-blog-overlay1">
 									<div class="card-body  text-white">
 									@if(session()->has('message'))
