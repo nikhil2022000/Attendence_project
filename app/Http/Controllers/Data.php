@@ -216,17 +216,17 @@ class Data extends Controller
 
     public function employ_month(Request $req)
     {
-     //echo'<pre>'; print_r($_POST); die;
+      //  echo'<pre>'; print_r($_POST); die;
 
         $name = $req->get('name');
         $branch = $req->get('branch');
         $month = $req->get('month');
-        // $year = $req->get('year');
+        $year = $req->get('year');
 
         $dat = DB::table('excel')
             ->Join('sheet1', 'excel.user_id', '=', 'sheet1.empid')
             ->where('sheet1.Name', 'LIKE', "%" . $name . "%")
-            // ->where('excel.year', 'LIKE', "%" . $year . "%")
+            ->where('excel.year', 'LIKE', "%" . $year . "%")
             ->where('excel.month', 'LIKE', "%" . $month . "%")
             ->where('sheet1.Branch', 'LIKE', "%" . $branch . "%")
             ->get();
@@ -241,7 +241,7 @@ class Data extends Controller
             $date = $empp->date;
             $first_in = $empp->first_in;
            if ($first_in == '00:00:00'){
-               $total_hours100 = '0.0';
+               $total_hours100 = 0.0;
            }else{
             $total_hours100 = $empp->total_hours100;
             
@@ -258,12 +258,12 @@ class Data extends Controller
 
 
 
- //echo'<pre>'; print_r($empdata); die;
+
         $response['data'] = $empdata;
         $response['success'] = true;
         $response['messages'] = 'Succesfully loaded';
         return Response::json($response);
-       // 
+       // echo'<pre>'; print_r($d); die;
      
       
        
