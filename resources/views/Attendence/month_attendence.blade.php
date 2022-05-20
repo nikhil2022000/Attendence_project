@@ -169,16 +169,17 @@ for ($i = 1; $i <= $count; $i++) {
 
 								<?php
 $c = 0;
+$d = 0;
 foreach ($Employdata as $dif) {
 	//dd($dif);
-    $count = \Carbon\Carbon::parse($dif['date'] )->format('d');
-    //dd($count);
-	
-    foreach ($th as $vv) {
+    // $count = \Carbon\Carbon::parse($dif['date'] )->format('d');
+   // dd($count);
+
+		//dd($th);
 //    echo'<pre>'; print_r($user->Empid);
 //    echo'<pre>'; print_r($dif['id']); die;
-        if ($user->Empid == $dif['id'] || $count == $vv) {
-
+        if ($user->Empid == $dif['id']) {
+			$d += 1;
             ?>
 									<td id="id2">
 											<div class="hr-listd">
@@ -186,7 +187,7 @@ foreach ($Employdata as $dif) {
 												<h6 class="mb-1 fs-14"><?php if ($dif['total_hours100'] >= 8) {$c += 1;?> <span class="feather feather-check-circle text-success"><?php
 												
 											} else {?>
-												 <span class="feather feather-x-circle text-danger ">hii <?php }?>
+												 <span class="feather feather-x-circle text-danger "> <?php }?>
 												</h6>
 
 											</div>
@@ -199,7 +200,7 @@ foreach ($Employdata as $dif) {
 
 								<?php
 }
-}
+
 ?>
 <!--                    monthly attendence                    -->
 											<td  id="id3">
@@ -207,7 +208,7 @@ foreach ($Employdata as $dif) {
 														<h6 class="mb-0">
 																<span class="text-primary">{{ $c }}</span>
 																<span class="my-auto fs-8 font-weight-normal text-muted">/</span>
-																<span class="">{{$count}}</span>
+																<span class="">{{$d}}</span>
 												</h6>
 											</div>
 										</td>
@@ -312,10 +313,10 @@ foreach ($Employdata as $dif) {
 						F += 1;
 						if(dat.total_hours100 >= 8.0){
 							E += 1;
-							$("#id_"+i).append("<td>" + '<span class="feather feather-check-circle text-success">'+ dat.total_hours100 + "</td>");
+							$("#id_"+i).append("<td>" + '<span class="feather feather-check-circle text-success">'+ "</td>");
 							
 						} else {
-						$("#id_"+i).append("<td>" +  '<span class="feather feather-x-circle text-danger ">'+ dat.total_hours100 + "</td>");
+						$("#id_"+i).append("<td>" +  '<span class="feather feather-x-circle text-danger ">'+ "</td>");
 
                               
 						}
