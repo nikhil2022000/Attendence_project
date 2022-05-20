@@ -1,5 +1,6 @@
 @extends('header_footer.main')
 @section('main-container')
+<h1>hi</hi>
 
 <div class="row">
 	<div class="col-xl-12 col-md-12 col-lg-12">
