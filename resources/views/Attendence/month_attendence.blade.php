@@ -179,18 +179,22 @@ foreach ($Employdata as $dif) {
         if ($user->Empid == $dif['id'] && $count == $vv) {
 
             ?>
-									<td id="id2">
+			<td>
+				hiiii
+		    </td>
+				
+									<!-- <td id="id2">
 											<div class="hr-listd">
 
-												<h6 class="mb-1 fs-14"><?php if ($dif['total_hours100'] >= 8) {$c += 1;?>hiii <span class="feather feather-check-circle text-success"><?php
+												<h6 class="mb-1 fs-14"><?php if ($dif['total_hours100'] >= 8) {$c += 1;?> <span class="feather feather-check-circle text-success"><?php
 												
-											} else {?>
+											// } else {?>
 												 <span class="feather feather-x-circle text-danger "> <?php }?>
 												</h6>
 
 											</div>
 										</td>
-										
+										 -->
 
 									<?php
 }
