@@ -1,6 +1,5 @@
 @extends('header_footer.main')
 @section('main-container')
-<h1>hi</hi>
 
 <div class="row">
 	<div class="col-xl-12 col-md-12 col-lg-12">
@@ -11,7 +10,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<form id="formemploy" method="post">
+									<form id="empl" method="post">
 										@csrf
 										<label class="form-label" id="m">Employee</label>
 										<input class="form-control custom-select" type="text" name="name"
@@ -239,7 +238,7 @@ foreach ($Employdata as $dif) {
 		$('#month_table').DataTable();
 	});
 
-	$('#formemploy').on('submit', function (e) {
+	$('#empl').on('submit', function (e) {
 		//alert('ds');
 		e.preventDefault();
 		var formData = new FormData(this);
