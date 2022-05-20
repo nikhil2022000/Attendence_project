@@ -173,15 +173,15 @@ foreach ($Employdata as $dif) {
 	//dd($dif);
     $count = \Carbon\Carbon::parse($dif['date'] )->format('d');
     //dd($count);
-	
-    foreach ($th as $vv) {
-
-        if ($user->Empid == $dif['id'] && $count == $vv) {
+	       
+    foreach ($th as $vv) { ?>
+		<td>
+		hiiii
+	       </td>
+       <?php if ($user->Empid == $dif['id'] && $count == $vv) {
 
             ?>
-			<td>
-				hiiii
-		    </td>
+			
 				
 									<!-- <td id="id2">
 											<div class="hr-listd">
