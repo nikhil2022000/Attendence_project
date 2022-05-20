@@ -216,54 +216,54 @@ class Data extends Controller
 
     public function employ_month(Request $req)
     {
-      //  echo'<pre>'; print_r($_POST); die;
+     //echo'<pre>'; print_r($_POST); die;
 
         $name = $req->get('name');
         $branch = $req->get('branch');
         $month = $req->get('month');
-        $year = $req->get('year');
+        // $year = $req->get('year');
 
         $dat = DB::table('excel')
             ->Join('sheet1', 'excel.user_id', '=', 'sheet1.empid')
             ->where('sheet1.Name', 'LIKE', "%" . $name . "%")
-            ->where('excel.year', 'LIKE', "%" . $year . "%")
+            // ->where('excel.year', 'LIKE', "%" . $year . "%")
             ->where('excel.month', 'LIKE', "%" . $month . "%")
             ->where('sheet1.Branch', 'LIKE', "%" . $branch . "%")
             ->get();
 
-        $vv = json_decode(json_encode($dat));
+        $ss = json_decode(json_encode($dat));
        // echo"<pre>";print_r($vv);die;
 
-        foreach ($vv as $user) {
+        foreach ($ss as $empp) {
         
-            $Empid = $user->Empid;
-            $Name = $user->Name;
-            $date = $user->date;
-            $first_in = $user->first_in;
+            $Empid = $empp->Empid;
+            $Name = $empp->Name;
+            $date = $empp->date;
+            $first_in = $empp->first_in;
            if ($first_in == '00:00:00'){
-               $total_hours100 = 0.0;
+               $total_hours100 = '0.0';
            }else{
-            $total_hours100 = $user->total_hours100;
+            $total_hours100 = $empp->total_hours100;
             
            }
-            $Branch = $user->Branch;
+            $Branch = $empp->Branch;
          
 
-            $d = array( 'id' => $Empid, 'Name' => $Name,  'date' => $date,'first_in' => $first_in, 'total_hours100' => $total_hours100, 'Branch' => $Branch);
+            $f = array( 'id' => $Empid, 'Name' => $Name,  'date' => $date,'first_in' => $first_in, 'total_hours100' => $total_hours100, 'Branch' => $Branch);
             //echo'<pre>'; print_r($first_in); 
-            $fulldata[] = $d;
+            $empdata[] = $f;
  }
  //die;
           
 
 
 
-
-        $response['data'] = $fulldata;
+ //echo'<pre>'; print_r($empdata); die;
+        $response['data'] = $empdata;
         $response['success'] = true;
         $response['messages'] = 'Succesfully loaded';
         return Response::json($response);
-       // echo'<pre>'; print_r($d); die;
+       // 
      
       
        

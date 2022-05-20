@@ -258,7 +258,7 @@ foreach ($Employdata as $dif) {
 				},
 			success: function (response) {
 				//var valdata=response['data'] ;
-				console.log(response['data']);
+				//console.log(response['data']); return false;
 
 				function onlyUnique(value, index, self) {
  					 return self.indexOf(value) === index;
@@ -311,7 +311,7 @@ foreach ($Employdata as $dif) {
 						
 					if(in_time[0] ==  dat.id){
 						F += 1;
-						if(dat.total_hours100 >= 8.0){
+						if(dat.total_hours100 >= '8'){
 							E += 1;
 							$("#id_"+i).append("<td>" + '<span class="feather feather-check-circle text-success">'+ "</td>");
 							
