@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\usersImport;
+use App\Imports\UsersImport;
 use App\Models\Attendence;
 use DB;
 use Excel;
@@ -23,7 +23,7 @@ class Data extends Controller
 
         // dd($model);
         //echo"<pre>";print_r($_FILES);die;
-        Excel::import(new usersImport, $req->file('file'));
+        Excel::import(new UsersImport, $req->file('file'));
         return redirect()->back()->with('message', 'Data successfully Import');
     }
     public function fetch(Request $req)
