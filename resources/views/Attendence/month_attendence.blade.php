@@ -330,24 +330,8 @@ foreach ($Employdata as $dif) {
 				});	
 
 				$("#id_"+i).append("<td> <span>"+ E + "</span>/"+F +"</td>");	
-			});	
-					
-				
-					
-			
-					
-					
-				
-				  
-				
-				
-				  
-
-
-				}else{
-				
-			
-			}
+			});
+				}
 		},
 		error: function (error) {
     				swal("OOH Error!",'Recode is not available', "error");
