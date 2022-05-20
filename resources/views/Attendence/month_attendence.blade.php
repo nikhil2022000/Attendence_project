@@ -173,28 +173,24 @@ foreach ($Employdata as $dif) {
 	//dd($dif);
     $count = \Carbon\Carbon::parse($dif['date'] )->format('d');
     //dd($count);
-	       
-    foreach ($th as $vv) { ?>
-		<td>
-		hiiii
-	       </td>
-       <?php if ($user->Empid == $dif['id'] && $count == $vv) {
+	
+    foreach ($th as $vv) {
+
+        if ($user->Empid == $dif['id'] && $count == $vv) {
 
             ?>
-			
-				
-									<!-- <td id="id2">
+									<td id="id2">
 											<div class="hr-listd">
 
-												<h6 class="mb-1 fs-14"><?php if ($dif['total_hours100'] >= 8) {$c += 1;?> <span class="feather feather-check-circle text-success"><?php
+												<h6 class="mb-1 fs-14"><?php if ($dif['total_hours100'] >= 8) {$c += 1;?>hiii <span class="feather feather-check-circle text-success"><?php
 												
-											// } else {?>
+											} else {?>
 												 <span class="feather feather-x-circle text-danger "> <?php }?>
 												</h6>
 
 											</div>
 										</td>
-										 -->
+										
 
 									<?php
 }
