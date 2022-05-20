@@ -88,7 +88,7 @@
 				</div>
 				<div class="table-responsive hr-attlist">
 					<table class="table  table-vcenter text-nowrap table-bordered border-bottom table-striped vk"
-						id="m_table">
+						id="month_table">
 						<thead>
 							<?php
 // echo'<pre>'; print_r($data); die;
@@ -182,21 +182,17 @@ foreach ($Employdata as $dif) {
 									<td id="id2">
 											<div class="hr-listd">
 
-												<h6 class="mb-1 fs-14"><?php if ($dif['total_hours100'] >= 8) {$c += 1;?> <span class="feather feather-check-circle text-success">{{$dif['total_hours100']}}
+												<h6 class="mb-1 fs-14"><?php if ($dif['total_hours100'] >= 8) {$c += 1;?> <span class="feather feather-check-circle text-success">
 													
 													<?php
 												
 											} else {?>
-												 <span class="feather feather-x-circle text-danger ">{{$dif['total_hours100']}} <?php }?>
+												 <span class="feather feather-x-circle text-danger "> <?php }?>
 												</h6>
 
 											</div>
 										</td>
-										<script>
-														
-														var in_time = $("#m_table").attr('coun ').length;
-														
-												</script>
+										
 
 									<?php
 }
@@ -239,7 +235,7 @@ foreach ($Employdata as $dif) {
 
 <script>
 	$(document).ready(function () {
-		$('#m_table').DataTable();
+		$('#month_table').DataTable();
 	});
 
 	$('#formemploy').on('submit', function (e) {
@@ -257,8 +253,8 @@ foreach ($Employdata as $dif) {
 			contentType: false,
 			beforeSend:                      //reinitialize Datatables
 				function () {
-					$('#m_table').dataTable().fnClearTable();
-					$('#m_table').dataTable().fnDestroy();
+					$('#month_table').dataTable().fnClearTable();
+					$('#month_table').dataTable().fnDestroy();
 				},
 			success: function (response) {
 				//var valdata=response['data'] ;
@@ -292,12 +288,12 @@ foreach ($Employdata as $dif) {
 						var key = Object.keys(this);
 						var val = this;
 						//console.log(val);
-						$('#m_table tbody ').append("<tr><td mineData="+val+">" + val.split('-')[0] + "</td></tr>");
+						$('#month_table tbody ').append("<tr><td mineData="+val+">" + val.split('-')[0] + "</td></tr>");
 
 					});
 
 					var i = 0;
-					$('#m_table tbody tr').each(function(){
+					$('#month_table tbody tr').each(function(){
 					i++;
 					//console.log(i);return false;
 				    var d = $(this).prop("id","id_"+i);
@@ -329,7 +325,7 @@ foreach ($Employdata as $dif) {
 										
 				});	
 
-				$("#id_"+i).append("<td> <span>"+ E + "</span>/"+F +"</td>");	
+				$("#id_"+i).append("<td>"+ E + "/"+ F +"</td>");	
 			});
 				}
 		},
