@@ -95,7 +95,7 @@ Route::get('Add_holiday', function () {
  Route::get('match', function () {
     return view('match _employe');  
 });
-Route::any('mail',[Data::class,'Emp_mail']);
+
 
 Auth::routes();
 

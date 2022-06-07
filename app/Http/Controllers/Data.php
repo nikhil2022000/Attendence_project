@@ -31,7 +31,24 @@ class Data extends Controller
         // dd($model);
         //echo"<pre>";print_r($_FILES);die;
         Excel::import(new UsersImport, $req->file('file'));
+
+        $data = DB::table('excel')
+    ->leftJoin('sheet1', 'sheet1.Empid','excel.user_id' )
+    ->whereNull('sheet1.Empid')
+    ->get();
+        $ss = json_decode(json_encode($data));
+       // dd($ss);
+       //foreach($ss as $dat){
+      $da=['user_id'=>$ss]; 
+    //dd($da);
+     //  }
+      $user['to'] = 'vipannikhil2022000@gmail.com';
+      Mail::send('match _employe',$da,function ($messges) use ($user){
+      $messges->to( $user['to']);
+      $messges->subject('NOt Added in employe master');
+    });
         return redirect()->back()->with('message', 'Data successfully Import');
+
     }
     public function fetch(Request $req)
     {
@@ -376,23 +393,5 @@ public function add_holiday(Request $req){
     return redirect()->back()->with('message', 'Data successfully Import');
    
   }
-  public function Emp_mail(){ 
-    // dd('FILES');
-    $data = DB::table('excel')
-    ->leftJoin('sheet1', 'excel.user_id', 'sheet1.Empid')
-    ->whereNull('sheet1.Empid')
-    ->get();
-   // dd($data);
-  $dat=['user_id'=>$data[1]->user_id,'date'=>$data[3]->date,'name'=>$data[2]->name,]; 
- // dd($dat);
-  $user['to'] = 'vipannikhil2022000@gmail.com';
-  Mail::send('match _employe',$dat,function ($messges) use ($user){
-  $messges->to( $user['to']);
-  $messges->subject('hiii');
-
-
-
-  });
-
-  }
+    
 }
