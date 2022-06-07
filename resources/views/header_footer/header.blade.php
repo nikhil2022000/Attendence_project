@@ -14,8 +14,8 @@
 
 		<!--Favicon -->
 		<link rel="icon" href="{{url('degine/images/brand/favicon.ico')}}" type="image/x-icon"/>
-		
-		
+
+
 
 		<!-- Bootstrap css -->
 		<link href="{{url('degine/plugins/bootstrap/css/bootstrap.css')}}" rel="stylesheet" id="style"/>
@@ -244,7 +244,7 @@
 														<i class="feather feather-edit-2 me-3 fs-16 my-auto"></i>
 														<div class="mt-1">Change Password</div>
 													</a>
-													
+
 													<a class="dropdown-item dropdown-item d-flex" href="{{ route('logout') }}"
                                        					onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -284,7 +284,7 @@
 											<img src="{{url('degine/images/users/16.jpg')}}" alt="user-img" class="avatar-xxl rounded-circle mb-1">
 										</div>
 										<div class="user-info">
-											<h5 class=" mb-2"> {{ Auth::user()->name }}</h5>
+											<h5 class=" mb-2"> {{ Auth::user()['name'] }}</h5>
 											<span class="text-muted app-sidebar__user-name text-sm">App Developer</span>
 										</div>
 									</div>
@@ -303,10 +303,42 @@
 													<span class="sub-side-menu__label">Hr <span class="nav-list">Dashboard</span></span><i class="sub-angle fa fa-angle-right"></i>
 												</a>
 												<ul class="sub-slide-menu">
-													<li><a href="/show_import" class="sub-slide-item">Import</a></li>
-													<li><a href="/fetch" class="sub-slide-item">Attendence list</a></li>
-													<li><a href="/emplist" class="sub-slide-item">short attendence</a></li>
-													<li><a href="/month_list" class="sub-slide-item">Month Attendence</a></li>
+												<?php
+												$user = auth()->user();
+												//  var_dump($user->role);
+												if ($user->role == 'hr_user') {
+													?>
+
+									<li><a href="/show_import" class="sub-slide-item">Import</a></li>
+									<li><a href="/month_list" class="sub-slide-item">Month Attendence</a></li>
+									<li><a href="/fetch" class="sub-slide-item">Attendence list</a></li>
+									<li><a href="/emplist" class="sub-slide-item">short attendence</a></li>
+									<li><a href="/master" class="sub-slide-item">Employe_list</a></li>
+									<li><a href="/add_emp" class="sub-slide-item">Emp_master</a></li>
+									<li><a href="/B-add" class="sub-slide-item">Branch_add</a></li>
+									<li><a href="/Branch_list" class="sub-slide-item">Branch_list</a></li>
+									<li><a href="/Add_holiday" class="sub-slide-item">add_holiday</a></li>
+									
+
+									<?php
+											}
+											
+											if ($user->role == 'admin') {
+													?>
+
+									<li><a href="/show_import" class="sub-slide-item">Import</a></li>
+									<li><a href="/fetch" class="sub-slide-item">Attendence list</a></li>
+									<li><a href="/emplist" class="sub-slide-item">short attendence</a></li>
+									<li><a href="/month_list" class="sub-slide-item">Month Attendence</a></li>
+									<li><a href="/users" class="sub-slide-item">Admin</a></li>
+
+
+											<?php
+
+											}
+											?>
+
+
 											</ul>
 											</li>
 										</ul>

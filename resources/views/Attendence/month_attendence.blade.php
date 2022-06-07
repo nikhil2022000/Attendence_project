@@ -154,6 +154,10 @@ for ($i = 1; $i <= $count; $i++) {
 
 
 							@foreach($employ as $user)
+							<?php
+    // echo'<pre>'; print_r($employ); die;
+		
+?>
 							 <tr id="id">
 								 <td><h6 class="mb-1 fs-14">{{$user->Name}}</h6></td>
 								 <td id="id1" >
@@ -168,38 +172,63 @@ for ($i = 1; $i <= $count; $i++) {
 
 
 								<?php
+			
 $c = 0;
 $d = 0;
 foreach ($Employdata as $dif) {
-	//dd($dif);
-    // $count = \Carbon\Carbon::parse($dif['date'] )->format('d');
-   // dd($count);
+  // dd($dif);
+    if ($user->Empid == $dif['id']) {
+        $d += 1;
+		$u=8.0;
+		$v=4.0;
 
-		//dd($th);
-//    echo'<pre>'; print_r($user->Empid);
-//    echo'<pre>'; print_r($dif['id']); die;
-        if ($user->Empid == $dif['id']) {
-			$d += 1;
-            ?>
+        ?>
+		 
 									<td id="id2">
 											<div class="hr-listd">
 
-												<h6 class="mb-1 fs-14"><?php if ($dif['total_hours100'] >= 8) {$c += 1;?> <span class="feather feather-check-circle text-success"><?php
-												
-											} else {?>
-												 <span class="feather feather-x-circle text-danger "> <?php }?>
-												</h6>
+												<h6 class="mb-1 fs-14">
+												@foreach($holiday as $us)
+												<?php
+												//dd($us);
+									 if(  $dif['total_hours100'] =='Leave' ) {?>
+									
+											<button  style="border:none; background-color:white;" type="button" class="btn btn-primary edtbrnch"  id="edi" value="{{$dif['ids']}}"> <span class="fa fa-star text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Leave" id="sp3"></span></button>
+										
+ 									<?php }else if( $dif['date'] == $us->Date  ) {?>
+									
+									<button  style="border:none; background-color:white;" type="button" class="btn btn-primary edtbrnch"  id="edi" value="{{$dif['ids']}}"> <span class="fa fa-star text-warning" data-bs-toggle="tooltip" data-bs-placement="top" title="Sunday" id="sp3"></span></button>
+						
+							 <?php } else if( $dif['total_hours100'] >= $v && $dif['total_hours100'] <= $u ) { ?>
+									
+									<button  style="border:none; background-color:white;" type="button" class="btn btn-primary edtbrnch"  id="edi" value="{{$dif['ids']}}"><span class="fa fa-adjust text-orange"  data-bs-toggle="tooltip" data-bs-placement="top" title="Half-day" id="sp3"></span></button>
+						
+							 <?php } else{
+										 
+													 if ($dif['total_hours100'] >= $u) {$c += 1;?>
+													 <button style="border:none; background-color:white;" type="button" class="btn btn-primary edtbrnch"  id="edi" value="{{$dif['ids']}}" > <span class="feather feather-check-circle text-success" id="sp1"></button> 
+													 <?php
+
+       								 } 
+										else{?>
+											<button  style="border:none; background-color:white;" type="button" class="btn btn-primary edtbrnch"  id="edi" value="{{$dif['ids']}}"> <span class="feather feather-x-circle text-danger " id="sp2"></button>
+ 									<?php }
+									 }
+									 ?>
+									@endforeach
+									 
+</h6>
 
 											</div>
 										</td>
-										
 
 									<?php
 }
-        ?>
+    ?>
 
 								<?php
 }
+
 
 ?>
 <!--                    monthly attendence                    -->
@@ -215,8 +244,84 @@ foreach ($Employdata as $dif) {
 
 
 							</tr>
+					
+			<!--Edit Modal -->
+			<div class="modal fade"  id="editmodal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Attendance Details</h5>
+							<button  class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-8">
+									<form id="timeediting" method="post" action="{{url('time')}}">
+									@csrf
+									<div class="form-group">
+										<label class="form-label">Clock In</label>
+										<div class="input-group">
+											<input type="text"  name='first_in' id="gg">
+											<div class="input-group-text">
+												<i class="fa fa-clock-o"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<label class="custom-switch mt-md-6">
+										<input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input orange" >
+										<span class="custom-switch-indicator "></span>
+										<span class="custom-switch-description text-dark">Late</span>
+									</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-8">
+									<div class="form-group">
+										<label class="form-label">Clock Out</label>
+										<div class="input-group">
+										<input type="number"  name='id' id="uniq" style="display:none;">
 
-
+											<input type="text"  name='last_out' id="kk">
+											<div class="input-group-text">
+												<i class="fa fa-clock-o"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<label class="custom-switch mt-md-6">
+										<input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input  orange">
+										<span class="custom-switch-indicator"></span>
+						 				<span class="custom-switch-description text-dark">half Day</span>
+									</label>
+								</div>
+							</div>
+							<div class="form-group">
+							<select name="Leave" id="Leave" style="width: 207px; height: 30px;">
+							`<option value="">select</option>
+                `            <option value="Leave">Leave</option>
+                           </select>
+							</div>
+							
+						</div>
+						<div class="modal-footer d-flex">
+							<div> 
+								<a  href="javascript:void(0);" class="btn btn-light"  data-bs-toggle="modal" data-bs-target="#presentmodal" data-bs-dismiss="modal"><i class="feather feather-arrow-left me-1"></i>Back</a>
+							</div>
+							<div class="ms-auto">
+							<input type="submit" name="submit" class="btn btn-primary btn-block">
+						
+							</div>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+			<!-- End Edit Modal  -->
 							@endforeach
 
 						</tbody>
@@ -234,6 +339,37 @@ foreach ($Employdata as $dif) {
 
 
 <script>
+$(document).ready(function () {
+    $(document).on('click','.edtbrnch',function(){
+        var b_id = $(this).val();
+       // alert(b_id);
+        $('#editmodal').modal('show');
+
+$.ajax({
+				type: "GET",
+				url: "/timeedit/"+b_id,
+				success: function(response){
+	// 	console.log(response.newcata.user_id);
+    //   alert(response.newcata.user_id);
+	$.each(response['newcata'], function () {
+						var key = Object.keys(this);
+						var value = this;
+						//alert(value.first_in);
+         $('#gg').val(value.first_in);
+          $('#kk').val(value.last_out);
+          $('#uniq').val(b_id);
+					
+	    });
+
+				
+				}
+    
+	    });
+	});
+	});
+	
+	
+
 	$(document).ready(function () {
 		$('#month_table').DataTable();
 	});
@@ -268,7 +404,7 @@ foreach ($Employdata as $dif) {
 				if (response['data'] !=  '') {
 					var nm = [];
 					var nam = [];
-					
+
 
 					$.each(response['data'], function () {
 						var key = Object.keys(this);
@@ -277,11 +413,11 @@ foreach ($Employdata as $dif) {
 						var c = value.id;
 						var d = value.Name;
 					    nm.push(c+'-'+d);
-						
+
 				});
 
 
-					
+
 					 var unique = nm.filter(onlyUnique);
 
 					$.each(unique, function () {
@@ -301,31 +437,32 @@ foreach ($Employdata as $dif) {
 					in_time = in_time.split('-');
 					//alert(d);
 
-					$("#id_"+i).append("<td>" + in_time[1] + "</td>");	
+					$("#id_"+i).append("<td>" + in_time[1] + "</td>");
 
 					var E = 0;
 					var F = 0;
 					$.each(response['data'], function () {
 						var key = Object.keys(this);
 						var dat = this;
-						
+                      var a = '8.0';
+					  attend=parseFloat(a);
 					if(in_time[0] ==  dat.id){
 						F += 1;
-						if(dat.total_hours100 >= '8'){
+						if(dat.total_hours100 >= attend){
 							E += 1;
 							$("#id_"+i).append("<td>" + '<span class="feather feather-check-circle text-success">'+ "</td>");
-							
+
 						} else {
-						$("#id_"+i).append("<td>" +  '<span class="feather feather-x-circle text-danger ">'+ "</td>");
+						$("#id_"+i).append("<td>" +  '<span class="feather feather-x-circle text-danger ">'+"</td>");
 
-                              
+
 						}
-						
-					}	
-										
-				});	
 
-				$("#id_"+i).append("<td>"+ E + "/"+ F +"</td>");	
+					}
+
+				});
+
+				$("#id_"+i).append("<td>"+ E + "/"+ F +"</td>");
 			});
 				}
 		},

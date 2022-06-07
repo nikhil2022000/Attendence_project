@@ -51,13 +51,12 @@ public function headingRow(): int
 
 									$start_datetime = new DateTime($start);
 									$end_datetime = new DateTime($end);
-                               
-                           
-                                
-                                
-                                
 									$vv = ($start_datetime)->diff($end_datetime)->format('%h.%i');
-								
+								if($start == '00:00:00' || $end == '00:00:00' ){
+                                    $ss = '0.0';
+                                }else{
+                                  $ss = $vv;
+                                }
 
 
          if($row['user_id']==null){
@@ -68,10 +67,10 @@ public function headingRow(): int
             'name' => $row['name'], 
             'date'=> $st,
            'first_in' => $start,
-          'last_out' => $end,   
+          'last_out' => $end,
           'in_device'=> $row['in_device'],   
           'out_device' => $row['out_device'],   
-          'total_hours100'  => $vv,   
+          'total_hours100'  => $ss,   
           'Month' => $_POST['month'],
             'year' => $_POST['year']
         ]);
