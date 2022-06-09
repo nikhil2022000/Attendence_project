@@ -15,7 +15,7 @@ use Mail;
 use Illuminate\Http\Request;
 use Response;
 use DateTime;
-
+use Carbon\Carbon;
 
 class Data extends Controller
 {
@@ -189,10 +189,15 @@ class Data extends Controller
             ->get();
         //echo'<pre>'; print_r($datecount); die;
         $data = json_decode(json_encode($datecount));
-        // echo"<pre>";print_r($vv);die;
- 
+         $today= Carbon::now();
+         $r = date("M", strtotime($today->month));
+        // echo"<pre>";print_r($r);die;
+        
          foreach ($data as $use) {
-         
+           $d= date("M", strtotime($use->date));
+         // echo"<pre>";print_r($d);die;
+            if($r == $d){
+            
              $Empid = $use->Empid;
              $date = $use->date;
              $id = $use->id;
@@ -200,8 +205,9 @@ class Data extends Controller
              $last_out = $use->last_out;
              $total_hours100 = $use->total_hours100;
              $d = array( 'id' => $Empid,'ids' => $id,  'date' => $date,'first_in' => $first_in,'last_out' => $last_out, 'total_hours100' => $total_hours100);
-            // echo'<pre>'; print_r($d); 
+            //echo'<pre>'; print_r($d); 
              $total[] = $d;
+            }
   }
         //die;
         $employ = DB::table('excel')
@@ -210,16 +216,41 @@ class Data extends Controller
             ->DISTINCT('sheet1.Empid')
             ->get();
 
-        $data = DB::table('excel')
+        $excel_data = DB::table('excel')
             ->select('user_id', 'Name', 'date')
             ->get();
+               //echo"<pre>";print_r($excel_data);die;
+
+            $use = json_decode(json_encode($excel_data));
+               //echo"<pre>";print_r($use);die;
+
+            $today= Carbon::now();
+            $t = date("M", strtotime($today->month));
+
+            foreach ($use as $month_da) {
+
+                $k = date("M", strtotime($month_da->date));
+              // echo"<pre>";print_r($user);die;
+                 if($t == $k){
+                 
+                  $user_id = $month_da->user_id;
+                  $Name = $month_da->Name;
+                  $date = $month_da->date;
+                
+                  $s = array( 'user_id' => $user_id,'Name' => $Name,  'date' => $date);
+                // echo'<pre>'; print_r($s); 
+                  $ta[] = $s;
+                 }
+       }
+
+
 
             $holiday = DB::table('holiday')
             ->select('Date')
             ->get();
-        //echo'<pre>'; print_r($holiday); die;
+       // echo'<pre>'; print_r($ta); die;
 
-        return view('Attendence.month_attendence', ['data' => $data, 'Employdata' => $total, 'employ' => $employ,  'holiday' => $holiday,]);
+        return view('Attendence.month_attendence', ['user' => $ta, 'Employdata' => $total, 'employ' => $employ,  'holiday' => $holiday,]);
     }
 
     public function employ_month(Request $req)

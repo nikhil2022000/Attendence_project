@@ -94,11 +94,12 @@
 // echo'<pre>'; print_r($data); die;
 
 ?>
-							@foreach($data as $user)
+							@foreach($user as $use)
 							<?php
-$fdata['id'][] = $user->user_id;
-$fdata['name'][] = $user->Name;
-$fdata['date'][] = $user->date;
+							// dd($use);
+$fdata['id'][] = $use['user_id'];
+$fdata['name'][] = $use['Name'];
+$fdata['date'][] = $use['date'];
 
 // $start = date("H:i:s", strtotime($user->first_in));
 // $end = date("H:i:s", strtotime($user->last_out));
@@ -211,7 +212,7 @@ foreach ($Employdata as $dif) {
 
        								 } 
 										else{?>
-											<button  style="border:none; background-color:white;" type="button" class="btn btn-primary edtbrnch"  id="edi" value="{{$dif['ids']}}"> <span class="feather feather-x-circle text-danger " id="sp2"></button>
+											<button  style="border:none; background-color:white;" type="button" class="btn btn-primary edtbrnch"  id="edi" value="{{$dif['ids']}}"> <span class="feather feather-x-circle text-danger " id="sp2"> </button>
  									<?php }
 									 }
 									 ?>
@@ -450,7 +451,7 @@ $.ajax({
 						F += 1;
 						if(dat.total_hours100 >= attend){
 							E += 1;
-							$("#id_"+i).append("<td>" + '<span class="feather feather-check-circle text-success">'+ "</td>");
+							$("#id_"+i).append("<td>"+' <span class="feather feather-check-circle text-success" id="sp1">'+" </td>");
 
 						} else {
 						$("#id_"+i).append("<td>" +  '<span class="feather feather-x-circle text-danger ">'+"</td>");
